@@ -1,0 +1,105 @@
+Settings:
+  command: farmaxe
+  aliases: [machado, machadofarm]
+  admin-permission: 'farmaxe.admin'
+  farm-axe-pickup-cooldown: 5
+  prevent-player-hit: true
+  quality-currency: 'cash' # MultiEconomy compatibility. Empty or null = plugin points
+
+Messages:
+  need-farm-axe: '&cVocê precisa usar um Machado de Farm!'
+  cooldown: '&cAguarde {cooldown} segundos antes de pegar outro Machado de Farm!'
+
+Titles:
+  farm-axe-upgrade:
+    title: '&a&lFarm'
+    subtitle: '&7Novo nível: &f{new_level}'
+
+Enchants:
+  dig_speed:
+    level:
+      initial: 0
+      max: 10
+      requirement-per-upgrade: 5
+    cost-per-level: 100
+  loot_bonus_blocks:
+    level:
+      initial: 0
+      max: 10
+      requirement-per-upgrade: 10
+    cost-per-level: 150
+  exp:
+    level:
+      initial: 0
+      max: 10
+      requirement-per-upgrade: 5
+    cost-per-level: 200
+    multiplier-per-level: 0.25 # exp * (1 + multiplier)
+
+Blocks:
+  disabled-worlds:
+    - 'RankupWorld'
+  blocks: # MATERIAL,EXP,POINTS
+    - 'CROPS:7,10,1'
+    - 'COCOA:8,10,1'
+    - 'NETHER_WARTS:3,10,1'
+    - 'MELON_BLOCK,10,1'
+
+Farm-Axe-Item:
+  type: DIAMOND_AXE
+  glow: true
+  hide-attributes: true
+  unbreakable: true
+  name: '&aMachado de Farm'
+  lore:
+    - '&7Eficiência: &f{dig_speed}'
+    - '&7Fortuna: &f{loot_bonus_blocks}'
+    - '&7EXP: &f{exp}'
+    - ''
+    - ' &8► &fNível: &7{level} {progress} &8({percentage}%)'
+    - ' &8► &fColheitas: &7{points} &a✾'
+    - ' &8► &fQualidade: {quality}'
+    - ''
+    - '&8Clique para evoluir!'
+
+Points-Item:
+  type: SKULL_ITEM
+  owner: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2FhNTk2NmExNDcyNDQ1MDRjYzU2ZWY2ZWZkMmQyZjQ0NzM4YjhmMDNkOTNhNjE3NjZhZjNmYzQ0ODdmOTgwYiJ9fX0=
+  name: '&aColheita ✾ &7[&fx{amount}&7]'
+  lore:
+    - '&7Aplique esse item no seu'
+    - '&7Machado de Farm para'
+    - '&7evoluir os encantamentos!'
+
+Quality:
+  initial: 0
+  max: 5
+  item-level-per-quality: 100
+  cost-per-quality: 5
+  bonus-per-quality: 0.4
+  symbol: '✯'
+  complete-color: '&e'
+  incomplete-color: '&8'
+
+Progress:
+  display-amount: 10
+  symbol: '❙'
+  complete-color: '&a'
+  incomplete-color: '&8'
+
+Experience-Formula: # base + (base * level ^ exponent)
+  base-exp: 350
+  exponent: 1.75
+
+Number-Formatter:
+  - "k"
+  - "M"
+  - "B"
+  - "T"
+  - "Q"
+  - "QQ"
+  - "S"
+  - "SS"
+  - "O"
+  - "N"
+  - "D"
