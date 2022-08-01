@@ -1,6 +1,7 @@
 package com.zpedroo.farmaxe;
 
 import com.zpedroo.farmaxe.commands.FarmAxeCmd;
+import com.zpedroo.farmaxe.hooks.PlaceholderAPIHook;
 import com.zpedroo.farmaxe.listeners.FarmAxeListeners;
 import com.zpedroo.farmaxe.listeners.PlayerGeneralListeners;
 import com.zpedroo.farmaxe.listeners.PointsListeners;
@@ -37,6 +38,7 @@ public class FarmAxe extends JavaPlugin {
         new Menus();
 
         registerListeners();
+        registerHooks();
         registerCommand(COMMAND, ALIASES, new FarmAxeCmd());
     }
 
@@ -44,6 +46,12 @@ public class FarmAxe extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerGeneralListeners(), this);
         getServer().getPluginManager().registerEvents(new FarmAxeListeners(), this);
         getServer().getPluginManager().registerEvents(new PointsListeners(), this);
+    }
+
+    private void registerHooks() {
+        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new PlaceholderAPIHook(this).register();
+        }
     }
 
     private void registerCommand(String command, List<String> aliases, CommandExecutor executor) {
