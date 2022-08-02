@@ -39,11 +39,11 @@ Enchants:
 Blocks:
   disabled-worlds:
     - 'RankupWorld'
-  blocks: # MATERIAL,EXP,POINTS
-    - 'CROPS:7,10,1'
-    - 'COCOA:8,10,1'
-    - 'NETHER_WARTS:3,10,1'
-    - 'MELON_BLOCK,10,1'
+  blocks: # MATERIAL,REPLANT,EXP,POINTS
+    - 'CROPS:7,CROPS:0,10,1'
+    - 'COCOA:8,COCOA:0,10,1'
+    - 'NETHER_WARTS:3,NETHER_WARTS:0,10,1'
+    - 'MELON_BLOCK,NULL,10,1'
 
 Farm-Axe-Item:
   type: DIAMOND_AXE

@@ -1,6 +1,7 @@
 package com.zpedroo.farmaxe.utils.loader;
 
 import com.zpedroo.farmaxe.objects.BlockProperties;
+import com.zpedroo.farmaxe.objects.MaterialProperties;
 import com.zpedroo.farmaxe.utils.formatter.NumberFormatter;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
@@ -16,7 +17,10 @@ public class BlockLoader {
     public static List<BlockProperties> load(List<String> list) {
         List<BlockProperties> ret = new ArrayList<>(list.size());
         for (String str : list) {
-            ret.add(load(str));
+            BlockProperties blockProperties = load(str);
+            if (blockProperties == null) continue;
+
+            ret.add(blockProperties);
         }
 
         return ret;
@@ -25,16 +29,25 @@ public class BlockLoader {
     @Nullable
     public static BlockProperties load(String str) {
         String[] split = str.split(",");
-        if (split.length <= 2) return null;
+        if (split.length <= 3) return null;
 
-        String[] materialSplit = split[0].split(":");
-        Material material = Material.getMaterial(materialSplit[0].toUpperCase());
+        MaterialProperties harvestMaterialProperties = getMaterialProperties(split[0]);
+        if (harvestMaterialProperties == null) return null;
+
+        MaterialProperties replantMaterialProperties = getMaterialProperties(split[1]);
+        double expAmount = Double.parseDouble(split[2]);
+        BigInteger pointsAmount = NumberFormatter.getInstance().filter(split[3]);
+
+        return new BlockProperties(harvestMaterialProperties, replantMaterialProperties, expAmount, pointsAmount);
+    }
+
+    private static MaterialProperties getMaterialProperties(String str) {
+        String[] split = str.split(":");
+        Material material = Material.getMaterial(split[0].toUpperCase());
         if (material == null) return null;
 
-        byte data = materialSplit.length > 1 ? Byte.parseByte(materialSplit[1]) : 0;
-        double expAmount = Double.parseDouble(split[1]);
-        BigInteger pointsAmount = NumberFormatter.getInstance().filter(split[2]);
+        byte data = split.length > 1 ? Byte.parseByte(split[1]) : 0;
 
-        return new BlockProperties(material, data, expAmount, pointsAmount);
+        return new MaterialProperties(material, data);
     }
 }
