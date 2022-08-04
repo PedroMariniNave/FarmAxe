@@ -253,9 +253,8 @@ public class FarmAxeUtils {
 
     public static int reverseQualityBonus(@NotNull ItemStack item, int level) {
         double qualityBonus = getFinalQualityBonus(item);
-        double divisor = level > qualityBonus ? qualityBonus : 1;
 
-        return (int) (level / divisor);
+        return (int) (level / qualityBonus);
     }
 
     public static boolean canUpgradeQuality(@NotNull ItemStack item) {
